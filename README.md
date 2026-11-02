@@ -16,3 +16,5 @@ Fire	Bottom right, next to Jump	throw an asyk at enemies
 Pause	Top right	open the pause menu, time stops
 
 Keyboard for testing on a computer: A/D or arrows to move, W or Space to jump, X to fire, Esc to pause.
+
+eam: solo until week 14, Aisha Issabayeva, all roles.
