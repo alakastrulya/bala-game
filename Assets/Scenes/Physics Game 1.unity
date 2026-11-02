@@ -1878,7 +1878,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -3823,7 +3823,6 @@ MonoBehaviour:
   jumpForce: 12
   fallThresholdY: -10
   coinClip: {fileID: 8300000, guid: 1bb7d9cf3747448f4b80ae8baa47d452, type: 3}
-  gate: {fileID: 0}
   coinText: {fileID: 295258962}
   finishOnAllCoins: 1
   finishDelay: 1
