@@ -89,4 +89,10 @@ public class MenuButtons : MonoBehaviour
         }
     }
 
+    public void RestartLevel()
+    {
+        Debug.Log("Game Over / Restart");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
 }
