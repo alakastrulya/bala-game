@@ -10,7 +10,7 @@ public class MenuButtons : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene("Physics Game 1");
+        SceneManager.LoadScene("Instruction");
     }
 
     public void Quit()
@@ -92,6 +92,11 @@ public class MenuButtons : MonoBehaviour
     public void RestartLevel()
     {
         Debug.Log("Game Over / Restart");
+        
+        if (BackgroundMusic.instance != null)
+        {
+            BackgroundMusic.instance.PlayDefaultMusic();
+        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

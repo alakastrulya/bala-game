@@ -12,11 +12,20 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: 679e13ed36415425398a5af4551641de
   - enabled: 1
+    path: Assets/Scenes/Instruction.unity
+    guid: 19238f97a394342ca9d5a43d6a3ff632
+  - enabled: 1
     path: Assets/Scenes/Physics Game 1.unity
     guid: 475f0c9eac02b4c118327208790d98a9
   - enabled: 1
+    path: Assets/Scenes/Instruction 1.unity
+    guid: 370897065bd8042bc9a12721355214c3
+  - enabled: 1
     path: Assets/Scenes/Physics Game 2.unity
     guid: 214a187b3c81347418c7a1d873b87b3b
+  - enabled: 1
+    path: Assets/Scenes/Instruction 2.unity
+    guid: 1df02e8b6bc304fb3a9d3a2fb3cc1013
   - enabled: 1
     path: Assets/Scenes/Physics Game 3.unity
     guid: 5163ccc65e3e641e2900fd1c2dd7302d
