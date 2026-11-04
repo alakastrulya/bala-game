@@ -47,5 +47,10 @@ public class BackgroundMusic : MonoBehaviour
             audioSource.loop = true;
             audioSource.Play();
         }
+        else
+        {
+            audioSource.UnPause();
+            if (!audioSource.isPlaying) audioSource.Play();
+        }
     }
 }
