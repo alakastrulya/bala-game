@@ -1,0 +1,11 @@
+Assignment 8-9. Kazakh Mobile Platformer 2D
+
+tool-why-what I asked-what I got-what I changed myself
+
+1. Claude web - to understand what MVP and cut list are - asked what MVP means and how to sort my ideas (3 more levels, second boss with asyk atu, story scenes, a choice in the story) - got an explanation about MVP, what can I do too if it will be enough time and cut list - I decided to keep the asyk boss and short story scenes and to cut the branching story
+
+2. Claude web - I could not move buttons into SafeArea - asked about the error "Cannot restructure Prefab instance" - got Prefab and Unpack - I unpacked the canvas and moved the HUD into SafeArea
+
+3. Claude web -  Jump and Fire were on top of each other - asked how anchors with Shift+Option work - got an explanation of Pos X / Pos Y from a corner and start values for each button - I set anchors and sizes for all HUD elements and tuned the numbers
+
+4. Claude web -  on tablets the level was cut and the boss was not visible - asked in which ways can I fix it for work on all screens - got that I need to write CameraFit script and the explanation why size 5 was too small - I added CameraFit to level 3, changed the camera size, scaled the background and fix the boss HP
