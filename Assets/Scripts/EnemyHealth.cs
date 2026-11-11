@@ -5,6 +5,9 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] int maxHp = 2;
     [SerializeField] AudioClip hitClip;
+    [SerializeField] AudioClip deathClip;
+    [SerializeField] float deathJump = 5f;
+    [SerializeField] float deathTime = 1f;
     [SerializeField] float blinkTime = 0.3f;
     [SerializeField] float barWidth = 1f;
     [SerializeField] float barHeight = 0.12f;
@@ -14,6 +17,7 @@ public class EnemyHealth : MonoBehaviour
     int hp;
     SpriteRenderer sr;
     Transform barFill;
+    bool dead;
 
     void Awake()
     {
@@ -24,18 +28,57 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeHit(int damage)
     {
+        if (dead) return;
         hp -= damage;
-        if (hitClip != null) AudioSource.PlayClipAtPoint(hitClip, transform.position);
 
         if (hp <= 0)
         {
-            Destroy(gameObject);
+            Die();
             return;
         }
 
+        if (hitClip != null) AudioSource.PlayClipAtPoint(hitClip, transform.position);
         UpdateBar();
         StopAllCoroutines();
         StartCoroutine(Blink());
+
+        EnemyBase ai = GetComponent<EnemyBase>();
+        if (ai != null) ai.Alert();
+    }
+
+    void Die()
+    {
+        dead = true;
+        StopAllCoroutines();
+        if (deathClip != null) AudioSource.PlayClipAtPoint(deathClip, transform.position);
+
+        EnemyBase ai = GetComponent<EnemyBase>();
+        if (ai != null) ai.enabled = false;
+        Animator anim = GetComponent<Animator>();
+        if (anim != null) anim.enabled = false;
+        foreach (Collider2D c in GetComponents<Collider2D>()) c.enabled = false;
+        foreach (Renderer r in GetComponentsInChildren<Renderer>())
+            if (r != sr) r.enabled = false;
+
+        sr.enabled = true;
+        sr.color = Color.white;
+        sr.flipY = true;
+
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = Mathf.Max(rb.gravityScale, 1f);
+        rb.linearVelocity = new Vector2(0f, deathJump);
+
+        StartCoroutine(FadeOut());
+    }
+
+    IEnumerator FadeOut()
+    {
+        for (float t = 0f; t < deathTime; t += Time.deltaTime)
+        {
+            sr.color = new Color(1f, 1f, 1f, 1f - t / deathTime);
+            yield return null;
+        }
+        Destroy(gameObject);
     }
 
     IEnumerator Blink()

@@ -49,7 +49,7 @@ public class GooseCharger : EnemyBase
     void SetState(State next)
     {
         state = next;
-        EnterState(next.ToString(), next == State.WindUp);
+        EnterState(next.ToString(), (int)next, next == State.WindUp);
 
         if (next == State.WindUp)
         {

@@ -29,14 +29,13 @@ public class FoxPatrol : EnemyBase
         {
             case State.Patrol:
                 Patrol();
-                if (seesPlayer) SetState(State.Chase);
+                if (seesPlayer && stateTimer > 1f) SetState(State.Chase);
                 break;
 
             case State.Chase:
-                if (seesPlayer) lostTimer = 0f;
+                bool moving = Chase();
+                if (seesPlayer && moving) lostTimer = 0f;
                 else lostTimer += Time.deltaTime;
-
-                Chase();
 
                 if (DistanceToPlayer() < attackRange && IsOnScreen()) SetState(State.WindUp);
                 else if (lostTimer > loseTime) SetState(State.Patrol);
@@ -80,12 +79,18 @@ public class FoxPatrol : EnemyBase
         MoveX(facing * patrolSpeed);
     }
 
-    void Chase()
+    bool Chase()
     {
         Face(PlayerDX());
 
-        if (CanWalk(facing)) MoveX(facing * chaseSpeed);
-        else MoveX(0f);
+        if (CanWalk(facing))
+        {
+            MoveX(facing * chaseSpeed);
+            return true;
+        }
+
+        MoveX(0f);
+        return DistanceToPlayer() < attackRange;
     }
 
     void Bite()

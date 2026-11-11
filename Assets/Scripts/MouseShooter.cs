@@ -70,7 +70,7 @@ public class MouseShooter : EnemyBase
     void SetState(State next)
     {
         state = next;
-        EnterState(next.ToString(), next == State.Aim);
+        EnterState(next.ToString(), (int)next, next == State.Aim);
         if (aimLine != null) aimLine.enabled = next == State.Aim;
         if (next == State.Aim) PlaySound(aimClip);
     }

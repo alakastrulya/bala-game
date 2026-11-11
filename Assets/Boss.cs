@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Boss : MonoBehaviour
 {
@@ -57,6 +58,14 @@ public class Boss : MonoBehaviour
 
     void ShowWin()
     {
-        if (winMenu != null) winMenu.ShowWin();
+        if (winMenu != null)
+        {
+            winMenu.ShowWin();
+            return;
+        }
+
+        int next = SceneManager.GetActiveScene().buildIndex + 1;
+        if (next < SceneManager.sceneCountInBuildSettings) SceneManager.LoadScene(next);
+        else SceneManager.LoadScene(0);
     }
 }
