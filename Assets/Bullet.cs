@@ -14,19 +14,27 @@ public class Bullet : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other)
-{
-    Boss boss = other.GetComponentInParent<Boss>();
-    if (boss != null)
     {
-        boss.TakeHit(1);
+        Boss boss = other.GetComponentInParent<Boss>();
+        if (boss != null)
+        {
+            boss.TakeHit(1);
+            Destroy(gameObject);
+            return;
+        }
+
+        EnemyHealth enemy = other.GetComponentInParent<EnemyHealth>();
+        if (enemy != null)
+        {
+            enemy.TakeHit(1);
+            Destroy(gameObject);
+            return;
+        }
+
+        Hazard h = other.GetComponentInParent<Hazard>();
+        if (h == null) return;
+
+        h.HitByBullet();
         Destroy(gameObject);
-        return;
     }
-
-    Hazard h = other.GetComponentInParent<Hazard>();
-    if (h == null) return;
-
-    h.HitByBullet();
-    Destroy(gameObject);
-}
 }
