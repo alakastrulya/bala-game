@@ -26,6 +26,7 @@ public class Player2D : MonoBehaviour
     public bool finishOnAllCoins = false;
     public float finishDelay = 1f;
     private bool levelFinished;
+    public WinMenu winMenu;
 
     void Awake()
     {
@@ -125,8 +126,9 @@ public class Player2D : MonoBehaviour
 
             if (coins >= coinsTotal)
             {
-                Debug.Log("You win!");
-                CompleteLevelAndLoadNext();
+                levelFinished = true;
+                if (winMenu != null) winMenu.ShowWin();
+                else CompleteLevelAndLoadNext();
             }
             else
             {

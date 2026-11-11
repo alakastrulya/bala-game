@@ -29,5 +29,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Physics Game 3.unity
     guid: 5163ccc65e3e641e2900fd1c2dd7302d
+  - enabled: 1
+    path: Assets/Scenes/Instruction 3.unity
+    guid: 8a4017b54d77949b587b15c1a22d58c0
+  - enabled: 1
+    path: Assets/Scenes/Physics Game 4.unity
+    guid: cc89925be03b0492c9477068ec7a74c8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
