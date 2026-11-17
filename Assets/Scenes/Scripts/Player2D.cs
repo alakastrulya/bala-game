@@ -127,10 +127,21 @@ public class Player2D : MonoBehaviour
         {
             if (levelFinished) return;
 
+            if (LevelLoader.Instance != null)
+            {
+                if (LevelLoader.Instance.GoalDone(coins, coinsTotal))
+                {
+                    levelFinished = true;
+                    LevelLoader.Instance.Complete();
+                }
+                else Debug.Log("Goal not done yet: " + LevelLoader.Instance.Data.goal);
+                return;
+            }
+
             if (coins >= coinsTotal)
             {
                 levelFinished = true;
-                if (winMenu != null) winMenu.ShowWin();
+                if (winMenu != null) winMenu.Finish();
                 else CompleteLevelAndLoadNext();
             }
             else

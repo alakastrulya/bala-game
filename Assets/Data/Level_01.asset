@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fc8895ac5994b96aa4125bc8055642, type: 3}
+  m_Name: Level_01
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  levelName: Level 1
+  goal: 0
+  timeLimit: 90
+  playerStart: {x: 0.08, y: -1.6}
+  enemies:
+  - prefab: {fileID: 1066314336288498587, guid: 299aba1529abf4e7a92d76ffdbdaf2a6, type: 3}
+    position: {x: -5.98, y: -1.9}
+    patrolDistance: 0
+  coinPrefab: {fileID: 6549835337791516332, guid: 8fb07aecc3fe54f79917d7dd32975922, type: 3}
+  coins:
+  - {x: -7.37, y: -1.9}
+  - {x: 2.41, y: 3.99}
+  - {x: 6.66, y: -1.9}
+  - {x: -5.31, y: 6.07}
+  - {x: 5.04, y: 10.71}

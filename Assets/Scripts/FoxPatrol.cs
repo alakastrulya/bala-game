@@ -10,12 +10,23 @@ public class FoxPatrol : EnemyBase
 
     State state;
     int pointIndex;
+    float[] patrolX;
     float lostTimer;
 
     public override EnemyStats Stats => stats;
 
+    public void SetPatrol(float leftX, float rightX)
+    {
+        patrolX = new[] { leftX, rightX };
+    }
+
     void Start()
     {
+        if (patrolX == null)
+        {
+            patrolX = new float[points.Length];
+            for (int i = 0; i < points.Length; i++) patrolX[i] = points[i].position.x;
+        }
         SetState(State.Patrol);
     }
 
@@ -63,11 +74,11 @@ public class FoxPatrol : EnemyBase
 
     void Patrol()
     {
-        float dx = points[pointIndex].position.x - transform.position.x;
+        float dx = patrolX[pointIndex] - transform.position.x;
 
         if (Mathf.Abs(dx) < 0.1f)
         {
-            pointIndex = (pointIndex + 1) % points.Length;
+            pointIndex = (pointIndex + 1) % patrolX.Length;
             return;
         }
 

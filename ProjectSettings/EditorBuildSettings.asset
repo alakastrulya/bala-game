@@ -35,5 +35,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Physics Game 4.unity
     guid: cc89925be03b0492c9477068ec7a74c8
+  - enabled: 1
+    path: Assets/Scenes/Steppe Levels.unity
+    guid: 23f09d56f8b474c3e8ae1ae117d23a4e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
