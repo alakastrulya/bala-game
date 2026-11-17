@@ -5,13 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class Boss : MonoBehaviour
 {
-    public int maxHp = 8;
+    [SerializeField] BossStats stats;
+    public BossStats Stats => stats;
     public Slider hpBar;
     public WinMenu winMenu;
     public AudioClip hitClip;
     public AudioClip winClip;
 
     int hp;
+    int maxHp;
     bool dead;
     SpriteRenderer sr;
 
@@ -20,6 +22,7 @@ public class Boss : MonoBehaviour
 
     void Start()
     {
+        maxHp = stats.maxHp;
         hp = maxHp;
         sr = GetComponent<SpriteRenderer>();
         if (hpBar != null)

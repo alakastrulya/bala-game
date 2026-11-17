@@ -49,7 +49,7 @@ public class Hazard : MonoBehaviour
 
     protected virtual void OnHitPlayer(Health player)
     {
-        if (player != null) player.TakeDamage(1);
+        if (player != null) player.TakeDamage(player.GetComponent<Player2D>().Items.hazardDamage);
     }
 
     public void HitByBullet()

@@ -7,9 +7,7 @@ public class Spawner : MonoBehaviour
     public GameObject warningPrefab;
     public Boss boss;
 
-    public float warnTime = 1f;
-    public float interval = 2.5f;
-    public float intervalPhase2 = 1.5f;
+    [SerializeField] BossStats stats;
 
     public float minX = -8f;
     public float maxX = 8f;
@@ -18,18 +16,19 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
+        if (stats == null && boss != null) stats = boss.Stats;
         StartCoroutine(SpawnLoop());
     }
 
     IEnumerator SpawnLoop()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(stats.spawnStartDelay);
 
         while (boss == null || !boss.IsDead)
         {
             yield return StartCoroutine(SpawnWithWarning());
 
-            float wait = (boss != null && boss.IsPhaseTwo) ? intervalPhase2 : interval;
+            float wait = (boss != null && boss.IsPhaseTwo) ? stats.spawnIntervalPhase2 : stats.spawnInterval;
             yield return new WaitForSeconds(wait);
         }
     }
@@ -56,7 +55,7 @@ public class Spawner : MonoBehaviour
             warning = Instantiate(warningPrefab, new Vector3(x, markerY, 0), Quaternion.identity);
         }
 
-        yield return new WaitForSeconds(warnTime);
+        yield return new WaitForSeconds(stats.spawnWarnTime);
 
         if (warning != null) Destroy(warning);
 

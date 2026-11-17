@@ -2,13 +2,21 @@ using UnityEngine;
 
 public class Seed : Hazard
 {
-    public float speed = 6f;
+    const float LifeTime = 6f;
+
+    [HideInInspector] public float speed;
+    [HideInInspector] public int damage;
 
     void Start()
     {
         rb.gravityScale = 0f;
         rb.linearVelocity = transform.right * speed;
-        Destroy(gameObject, 6f);
+        Destroy(gameObject, LifeTime);
+    }
+
+    protected override void OnHitPlayer(Health player)
+    {
+        if (player != null) player.TakeDamage(damage);
     }
 
     protected override void OnLanded()

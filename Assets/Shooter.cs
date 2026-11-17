@@ -4,13 +4,20 @@ using UnityEngine.UI;
 public class Shooter : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    public float cooldown = 0.3f;
+    PlayerStats stats;
+    float cooldown;
     float nextShot = 0f;
 
     public AudioClip shootClip;
     private AudioSource audioSource;
 
     public Slider cooldownSlider;
+
+    void Awake()
+    {
+        stats = GetComponent<Player2D>().Stats;
+        cooldown = stats.shotCooldown;
+    }
 
     void Start()
     {
@@ -53,5 +60,7 @@ public class Shooter : MonoBehaviour
         {
             bullet.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
+
+        bullet.GetComponent<Bullet>().Init(stats.bulletSpeed, stats.bulletDamage);
     }
 }

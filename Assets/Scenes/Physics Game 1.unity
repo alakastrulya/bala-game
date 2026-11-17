@@ -6393,8 +6393,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d3269392b4f4b8f8950dfac83159d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player2D
-  speed: 7
-  jumpForce: 12
+  stats: {fileID: 11400000, guid: b497773f58b25461e9e357ef83561c58, type: 2}
+  items: {fileID: 11400000, guid: 1d9c9bd4e4b284a29bfe7c28b253df38, type: 2}
   fallThresholdY: -10
   coinClip: {fileID: 8300000, guid: 1bb7d9cf3747448f4b80ae8baa47d452, type: 3}
   coinText: {fileID: 295258962}
@@ -6693,7 +6693,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e0ffff115237463593b1fa3cea11736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  hp: 3
   hurtClip: {fileID: 8300000, guid: 4b06babcbb62d487db0db554205a3638, type: 3}
   healClip: {fileID: 8300000, guid: 7d5950ad968d94ea2b1a008ba3f36c7c, type: 3}
   hearts:

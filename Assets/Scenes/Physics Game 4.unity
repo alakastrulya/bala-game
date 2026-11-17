@@ -2689,7 +2689,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e0ffff115237463593b1fa3cea11736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  hp: 3
   hurtClip: {fileID: 8300000, guid: 4b06babcbb62d487db0db554205a3638, type: 3}
   healClip: {fileID: 8300000, guid: 1bb7d9cf3747448f4b80ae8baa47d452, type: 3}
   hearts:
@@ -2811,7 +2810,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shooter
   bulletPrefab: {fileID: 2630280227558575955, guid: 2320c761e238a41e5b1461bfec438429, type: 3}
-  cooldown: 0.3
   shootClip: {fileID: 8300000, guid: 3a38a2d9d85f5442b9d8c7e1dab14c39, type: 3}
   cooldownSlider: {fileID: 0}
 --- !u!1 &302478952
@@ -3635,7 +3633,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d14e10ea26a84fb292fcc9439aec32c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  maxHp: 3
   hitClip: {fileID: 0}
   deathClip: {fileID: 0}
   deathJump: 5
@@ -3745,21 +3742,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MouseShooter
   player: {fileID: 302339982}
-  viewRange: 6
-  fov: 120
   obstacleMask:
     serializedVersion: 2
     m_Bits: 512
   spriteFacesRight: 1
   warnColor: {r: 1, g: 0, b: 0, a: 1}
   stateLabel: {fileID: 0}
-  alertTime: 3
-  lookTime: 2
-  preferredDistance: 5
-  moveSpeed: 2
-  aimTime: 0.6
-  shotSpeed: 6
-  cooldown: 1.5
+  stats: {fileID: 11400000, guid: 21da76b5a131143399f693b9f2b6545f, type: 2}
   seedPrefab: {fileID: 988768481944462710, guid: 0f098b2b827ad49a9ae6b2cef8cac9cc, type: 3}
   aimLine: {fileID: 136071676}
   aimClip: {fileID: 0}
@@ -8491,7 +8480,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d14e10ea26a84fb292fcc9439aec32c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  maxHp: 3
   hitClip: {fileID: 0}
   deathClip: {fileID: 0}
   deathJump: 5
@@ -8601,20 +8589,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GooseCharger
   player: {fileID: 302339982}
-  viewRange: 6
-  fov: 120
   obstacleMask:
     serializedVersion: 2
     m_Bits: 512
   spriteFacesRight: 1
   warnColor: {r: 1, g: 0, b: 0, a: 1}
   stateLabel: {fileID: 1154845624}
-  alertTime: 3
-  windUp: 0.7
-  dashSpeed: 9
-  dashTime: 0.8
-  stunTime: 1
-  damage: 1
+  stats: {fileID: 11400000, guid: 0f9b35f76c3704ada8f8844dbb630aca, type: 2}
   hissClip: {fileID: 0}
 --- !u!95 &1036562515
 Animator:
@@ -9202,7 +9183,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d14e10ea26a84fb292fcc9439aec32c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  maxHp: 3
   hitClip: {fileID: 0}
   deathClip: {fileID: 0}
   deathJump: 5
@@ -9225,25 +9205,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoxPatrol
   player: {fileID: 302339982}
-  viewRange: 6
-  fov: 120
   obstacleMask:
     serializedVersion: 2
     m_Bits: 512
   spriteFacesRight: 1
   warnColor: {r: 1, g: 0, b: 0, a: 1}
   stateLabel: {fileID: 0}
-  alertTime: 3
+  stats: {fileID: 11400000, guid: 2b0b15691625349bd932cff90b824bfe, type: 2}
   points:
   - {fileID: 1770490852}
   - {fileID: 1679520685}
-  patrolSpeed: 1.7
-  chaseSpeed: 4
-  loseTime: 2
-  attackRange: 3
-  windUp: 0.5
-  recoverTime: 0.6
-  damage: 1
   growlClip: {fileID: 0}
 --- !u!50 &1081215297
 Rigidbody2D:

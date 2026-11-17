@@ -1865,7 +1865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d098e4076e8419f884bf65c5d4673e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boss
-  maxHp: 6
+  stats: {fileID: 11400000, guid: 8d1dc6927a54e4fb68e0a78dbd37961a, type: 2}
   hpBar: {fileID: 1073343765}
   winMenu: {fileID: 0}
   hitClip: {fileID: 8300000, guid: bbace6f2e36f9442899957b759b3ebea, type: 3}
@@ -1888,13 +1888,6 @@ MonoBehaviour:
   syringePrefab: {fileID: 6552008807814687173, guid: 9acaa2269247b4ca29f9f4e1bb85b1a3, type: 3}
   animator: {fileID: 1081814796}
   shootClip: {fileID: 0}
-  pause: 2.5
-  pausePhase2: 1.5
-  warnTime: 0.8
-  countPhase1: 3
-  countPhase2: 5
-  anglePhase1: 20
-  anglePhase2: 25
 --- !u!1 &1139431816
 GameObject:
   m_ObjectHideFlags: 0
@@ -1987,7 +1980,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e0ffff115237463593b1fa3cea11736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  hp: 3
   hurtClip: {fileID: 8300000, guid: 4b06babcbb62d487db0db554205a3638, type: 3}
   healClip: {fileID: 8300000, guid: 7d5950ad968d94ea2b1a008ba3f36c7c, type: 3}
   hearts:
@@ -2007,7 +1999,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shooter
   bulletPrefab: {fileID: 2630280227558575955, guid: 2320c761e238a41e5b1461bfec438429, type: 3}
-  cooldown: 0.3
   shootClip: {fileID: 8300000, guid: 3a38a2d9d85f5442b9d8c7e1dab14c39, type: 3}
   cooldownSlider: {fileID: 0}
 --- !u!4 &1181372117 stripped

@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class Pumpers : Hazard
 {
-    public float fuse = 2f;
     public AudioClip boomClip;
 
     protected override void OnLanded()
     {
-        Invoke(nameof(Detonate), fuse);
+        Invoke(nameof(Detonate), FindFirstObjectByType<Player2D>().Items.bombFuse);
     }
 
     void Detonate()
@@ -18,6 +17,6 @@ public class Pumpers : Hazard
 
     protected override void OnHitPlayer(Health player)
     {
-        if (player != null) player.TakeDamage(2);
+        if (player != null) player.TakeDamage(player.GetComponent<Player2D>().Items.bombDamage);
     }
 }

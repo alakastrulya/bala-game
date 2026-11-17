@@ -5,8 +5,11 @@ using TMPro;
 
 public class Player2D : MonoBehaviour
 {
-    public float speed = 7f;
-    public float jumpForce = 12f;
+    [SerializeField] PlayerStats stats;
+    [SerializeField] ItemStats items;
+    public PlayerStats Stats => stats;
+    public ItemStats Items => items;
+
     public float fallThresholdY = -10f;
 
     private Animator animator;
@@ -54,7 +57,7 @@ public class Player2D : MonoBehaviour
     {
         if (!onGround) return;
 
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, stats.jumpForce);
         onGround = false;
         if (animator != null) animator.SetBool("isJumping", true);
     }
@@ -81,7 +84,7 @@ public class Player2D : MonoBehaviour
     void FixedUpdate()
     {
         float x = move.x;
-        rb.linearVelocity = new Vector2(x * speed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(x * stats.speed, rb.linearVelocity.y);
 
         bool isMoving = Mathf.Abs(x) > 0.01f;
         if (animator != null)
@@ -147,7 +150,7 @@ public class Player2D : MonoBehaviour
 
         if (other.gameObject.CompareTag("Enemy"))
         {
-            if (health != null) health.TakeDamage(1);
+            if (health != null) health.TakeDamage(items.hazardDamage);
         }
     }
 

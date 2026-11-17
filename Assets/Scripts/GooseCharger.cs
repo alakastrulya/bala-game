@@ -4,15 +4,13 @@ public class GooseCharger : EnemyBase
 {
     enum State { Idle, WindUp, Dash, Stunned }
 
-    [SerializeField] float windUp = 0.7f;
-    [SerializeField] float dashSpeed = 9f;
-    [SerializeField] float dashTime = 0.8f;
-    [SerializeField] float stunTime = 1f;
-    [SerializeField] int damage = 1;
+    [SerializeField] GooseStats stats;
     [SerializeField] AudioClip hissClip;
 
     State state;
     int dashDir;
+
+    public override EnemyStats Stats => stats;
 
     void Start()
     {
@@ -25,23 +23,23 @@ public class GooseCharger : EnemyBase
         {
             case State.Idle:
                 MoveX(0f);
-                if (DistanceToPlayer() < viewRange) Face(PlayerDX());
-                if (stateTimer > 0.5f && seesPlayer && IsOnScreen()) SetState(State.WindUp);
+                if (DistanceToPlayer() < stats.viewRange) Face(PlayerDX());
+                if (stateTimer > stats.noticeDelay && seesPlayer && IsOnScreen()) SetState(State.WindUp);
                 break;
 
             case State.WindUp:
                 MoveX(0f);
-                if (stateTimer >= windUp) SetState(State.Dash);
+                if (stateTimer >= stats.windUp) SetState(State.Dash);
                 break;
 
             case State.Dash:
-                MoveX(dashDir * dashSpeed);
-                if (stateTimer >= dashTime || !CanWalk(dashDir)) SetState(State.Stunned);
+                MoveX(dashDir * stats.dashSpeed);
+                if (stateTimer >= stats.dashTime || !CanWalk(dashDir)) SetState(State.Stunned);
                 break;
 
             case State.Stunned:
                 MoveX(0f);
-                if (stateTimer >= stunTime) SetState(State.Idle);
+                if (stateTimer >= stats.cooldown) SetState(State.Idle);
                 break;
         }
     }
@@ -62,7 +60,7 @@ public class GooseCharger : EnemyBase
     {
         if (state == State.Dash && other.gameObject.CompareTag("Player"))
         {
-            playerHealth.TakeDamage(damage);
+            playerHealth.TakeDamage(stats.damage);
             SetState(State.Stunned);
         }
     }
