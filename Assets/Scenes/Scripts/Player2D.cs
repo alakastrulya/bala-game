@@ -42,6 +42,7 @@ public class Player2D : MonoBehaviour
 
     void Start()
     {
+        if (winMenu == null) winMenu = FindAnyObjectByType<WinMenu>();
         coinsTotal = GameObject.FindGameObjectsWithTag("Coin").Length;
         Debug.Log("Coins in this level: " + coinsTotal);
         UpdateCoinUI();
@@ -132,7 +133,7 @@ public class Player2D : MonoBehaviour
                 if (LevelLoader.Instance.GoalDone(coins, coinsTotal))
                 {
                     levelFinished = true;
-                    LevelLoader.Instance.Complete();
+                    LevelLoader.Instance.Complete(coins);
                 }
                 else Debug.Log("Goal not done yet: " + LevelLoader.Instance.Data.goal);
                 return;
@@ -141,8 +142,7 @@ public class Player2D : MonoBehaviour
             if (coins >= coinsTotal)
             {
                 levelFinished = true;
-                if (winMenu != null) winMenu.Finish();
-                else CompleteLevelAndLoadNext();
+                CompleteLevelAndLoadNext();
             }
             else
             {
@@ -173,6 +173,14 @@ public class Player2D : MonoBehaviour
 
     void CompleteLevelAndLoadNext()
     {
+        int score = LevelCatalog.ScoreForCurrent(coins);
+        if (winMenu != null)
+        {
+            winMenu.FinishWithScore(score);
+            return;
+        }
+
+        LevelCatalog.CompleteCurrent(score);
         int next = SceneManager.GetActiveScene().buildIndex + 1;
         if (next < SceneManager.sceneCountInBuildSettings) SceneManager.LoadScene(next);
         else SceneManager.LoadScene(0);

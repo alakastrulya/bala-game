@@ -14,12 +14,18 @@ public class BackgroundMusic : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
             audioSource = GetComponent<AudioSource>();
+            SetVolume(SaveSystem.Data.musicVolume);
         }
         else
         {
             Destroy(gameObject);
             return;
         }
+    }
+
+    public void SetVolume(float volume)
+    {
+        if (audioSource != null) audioSource.volume = volume;
     }
 
     public void PlayWinMusic()

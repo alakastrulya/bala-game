@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e05fb5769e8f64b609d47badeddee24d, type: 3}
+  m_Name: LevelCatalog
+  m_EditorClassIdentifier: Assembly-CSharp::LevelCatalog
+  levels:
+  - title: Level 1
+    startScene: Instruction
+    gameScene: Physics Game 1
+    dataLevel: -1
+    timeLimit: 90
+    pointsPerCoin: 100
+    pointsPerSecond: 10
+  - title: Level 2
+    startScene: Instruction 1
+    gameScene: Physics Game 2
+    dataLevel: -1
+    timeLimit: 120
+    pointsPerCoin: 100
+    pointsPerSecond: 10
+  - title: Level 3
+    startScene: Instruction 2
+    gameScene: Physics Game 3
+    dataLevel: -1
+    timeLimit: 150
+    pointsPerCoin: 100
+    pointsPerSecond: 10
+  - title: Level 4
+    startScene: Instruction 3
+    gameScene: Physics Game 4
+    dataLevel: -1
+    timeLimit: 120
+    pointsPerCoin: 100
+    pointsPerSecond: 10
+  - title: Level 5
+    startScene: 
+    gameScene: Steppe Levels
+    dataLevel: 0
+    timeLimit: 90
+    pointsPerCoin: 100
+    pointsPerSecond: 10
+  - title: Level 6
+    startScene: 
+    gameScene: Steppe Levels
+    dataLevel: 1
+    timeLimit: 90
+    pointsPerCoin: 100
+    pointsPerSecond: 10
+  - title: Level 7
+    startScene: 
+    gameScene: Steppe Levels
+    dataLevel: 2
+    timeLimit: 90
+    pointsPerCoin: 100
+    pointsPerSecond: 10

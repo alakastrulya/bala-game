@@ -29,6 +29,7 @@ public class LevelLoader : MonoBehaviour
 
     void Awake()
     {
+        if (winMenu == null) winMenu = FindAnyObjectByType<WinMenu>();
         Instance = this;
         if (Application.isEditor && !GameSession.StartedFromMenu) GameSession.LevelIndex = previewLevel;
         GameSession.LevelIndex = Mathf.Clamp(GameSession.LevelIndex, 0, levels.Length - 1);
@@ -93,13 +94,17 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
-    public void Complete()
+    public void Complete(int coins)
     {
         if (finished) return;
         finished = true;
 
+        int score = coins * data.pointsPerCoin + Mathf.CeilToInt(Mathf.Max(timeLeft, 0f)) * data.pointsPerSecond;
+        if (timerText != null) timerText.gameObject.SetActive(false);
+        if (levelText != null) levelText.gameObject.SetActive(false);
+
         if (intro != null) StopCoroutine(intro);
-        winMenu.Finish();
+        winMenu.FinishWithScore(score);
     }
 
     void OnDrawGizmos()

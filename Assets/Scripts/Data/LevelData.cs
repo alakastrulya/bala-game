@@ -20,8 +20,14 @@ public class LevelData : ScriptableObject
     public float timeLimit = 90f;
     public Vector2 playerStart;
 
+    [Header("Score")]
+    public int pointsPerCoin = 100;
+    public int pointsPerSecond = 10;
+
+    [Header("Enemies")]
     public List<EnemySpawn> enemies = new List<EnemySpawn>();
 
+    [Header("Coins")]
     public GameObject coinPrefab;
     public List<Vector2> coins = new List<Vector2>();
 }

@@ -22,6 +22,7 @@ public class Boss : MonoBehaviour
 
     void Start()
     {
+        if (winMenu == null) winMenu = FindAnyObjectByType<WinMenu>();
         maxHp = stats.maxHp;
         hp = maxHp;
         sr = GetComponent<SpriteRenderer>();
@@ -61,11 +62,14 @@ public class Boss : MonoBehaviour
 
     void ShowWin()
     {
+        int score = LevelCatalog.ScoreForCurrent(0);
         if (winMenu != null)
         {
-            winMenu.ShowWin();
+            winMenu.FinishWithScore(score);
             return;
         }
+
+        LevelCatalog.CompleteCurrent(score);
 
         int next = SceneManager.GetActiveScene().buildIndex + 1;
         if (next < SceneManager.sceneCountInBuildSettings) SceneManager.LoadScene(next);
