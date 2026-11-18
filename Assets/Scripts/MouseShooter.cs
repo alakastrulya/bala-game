@@ -4,18 +4,18 @@ public class MouseShooter : EnemyBase
 {
     enum State { Idle, KeepDistance, Aim, Cooldown }
 
-    [SerializeField] float lookTime = 2f;
-    [SerializeField] float preferredDistance = 5f;
-    [SerializeField] float moveSpeed = 2f;
-    [SerializeField] float aimTime = 0.6f;
-    [SerializeField] float shotSpeed = 6f;
-    [SerializeField] float cooldown = 1.5f;
+    const float AimLineLength = 8f;
+    const float ThrowOffset = 0.8f;
+
+    [SerializeField] MouseStats stats;
     [SerializeField] Seed seedPrefab;
     [SerializeField] LineRenderer aimLine;
     [SerializeField] AudioClip aimClip;
 
     State state;
     Vector2 aimDir;
+
+    public override EnemyStats Stats => stats;
 
     void Start()
     {
@@ -29,7 +29,7 @@ public class MouseShooter : EnemyBase
         {
             case State.Idle:
                 MoveX(0f);
-                if (stateTimer > lookTime)
+                if (stateTimer > stats.lookTime)
                 {
                     Face(-facing);
                     stateTimer = 0f;
@@ -39,8 +39,8 @@ public class MouseShooter : EnemyBase
 
             case State.KeepDistance:
                 KeepDistance();
-                if (stateTimer > 1f && seesPlayer && IsOnScreen()) SetState(State.Aim);
-                else if (stateTimer > 3f) SetState(State.Idle);
+                if (stateTimer > stats.noticeDelay && seesPlayer && IsOnScreen()) SetState(State.Aim);
+                else if (stateTimer > stats.giveUpTime) SetState(State.Idle);
                 break;
 
             case State.Aim:
@@ -50,10 +50,10 @@ public class MouseShooter : EnemyBase
                 if (aimLine != null)
                 {
                     aimLine.SetPosition(0, transform.position);
-                    aimLine.SetPosition(1, (Vector2)transform.position + aimDir * 8f);
+                    aimLine.SetPosition(1, (Vector2)transform.position + aimDir * AimLineLength);
                 }
 
-                if (stateTimer >= aimTime)
+                if (stateTimer >= stats.windUp)
                 {
                     Throw();
                     SetState(State.Cooldown);
@@ -62,7 +62,7 @@ public class MouseShooter : EnemyBase
 
             case State.Cooldown:
                 MoveX(0f);
-                if (stateTimer >= cooldown) SetState(State.KeepDistance);
+                if (stateTimer >= stats.cooldown) SetState(State.KeepDistance);
                 break;
         }
     }
@@ -81,19 +81,20 @@ public class MouseShooter : EnemyBase
         Face(dx);
 
         int dir = 0;
-        if (Mathf.Abs(dx) < preferredDistance - 1f) dir = -facing;
-        if (Mathf.Abs(dx) > preferredDistance + 1f) dir = facing;
+        if (Mathf.Abs(dx) < stats.preferredDistance - 1f) dir = -facing;
+        if (Mathf.Abs(dx) > stats.preferredDistance + 1f) dir = facing;
 
-        if (dir != 0 && CanWalk(dir)) MoveX(dir * moveSpeed);
+        if (dir != 0 && CanWalk(dir)) MoveX(dir * stats.moveSpeed);
         else MoveX(0f);
     }
 
     void Throw()
     {
         float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
-        Vector2 spawnPos = (Vector2)transform.position + aimDir * 0.8f;
+        Vector2 spawnPos = (Vector2)transform.position + aimDir * ThrowOffset;
 
         Seed s = Instantiate(seedPrefab, spawnPos, Quaternion.Euler(0f, 0f, angle));
-        s.speed = shotSpeed;
+        s.speed = stats.shotSpeed;
+        s.damage = stats.damage;
     }
 }

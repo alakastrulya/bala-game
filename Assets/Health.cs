@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
-    public int hp = 3;
+    int hp;
+    PlayerStats stats;
     private bool invincible = false;
     private SpriteRenderer sr;
 
@@ -13,6 +14,12 @@ public class Health : MonoBehaviour
     public AudioClip healClip;
     private AudioSource audioSource;
     public Image[] hearts;
+
+    void Awake()
+    {
+        stats = GetComponent<Player2D>().Stats;
+        hp = stats.maxHp;
+    }
 
     void Start()
     {
@@ -48,7 +55,7 @@ public class Health : MonoBehaviour
     public void Heal(int amount)
     {
         hp += amount;
-        if (hp > 3) hp = 3;
+        if (hp > stats.maxHp) hp = stats.maxHp;
         Debug.Log("Healed! HP: " + hp);
 
         UpdateHeartsUI();
@@ -63,10 +70,11 @@ public class Health : MonoBehaviour
     {
         invincible = true;
 
-        for (int i = 0; i < 10; i++)
+        const float blink = 0.2f;
+        for (float t = 0f; t < stats.invincibleTime; t += blink)
         {
             if (sr != null) sr.enabled = !sr.enabled;
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(blink);
         }
         if (sr != null) sr.enabled = true;
         invincible = false;

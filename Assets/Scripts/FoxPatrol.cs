@@ -4,22 +4,29 @@ public class FoxPatrol : EnemyBase
 {
     enum State { Patrol, Chase, WindUp, Recover }
 
+    [SerializeField] FoxStats stats;
     [SerializeField] Transform[] points;
-    [SerializeField] float patrolSpeed = 1.7f;
-    [SerializeField] float chaseSpeed = 4f;
-    [SerializeField] float loseTime = 2f;
-    [SerializeField] float attackRange = 1.2f;
-    [SerializeField] float windUp = 0.5f;
-    [SerializeField] float recoverTime = 0.6f;
-    [SerializeField] int damage = 1;
     [SerializeField] AudioClip growlClip;
 
     State state;
     int pointIndex;
+    float[] patrolX;
     float lostTimer;
+
+    public override EnemyStats Stats => stats;
+
+    public void SetPatrol(float leftX, float rightX)
+    {
+        patrolX = new[] { leftX, rightX };
+    }
 
     void Start()
     {
+        if (patrolX == null)
+        {
+            patrolX = new float[points.Length];
+            for (int i = 0; i < points.Length; i++) patrolX[i] = points[i].position.x;
+        }
         SetState(State.Patrol);
     }
 
@@ -29,7 +36,7 @@ public class FoxPatrol : EnemyBase
         {
             case State.Patrol:
                 Patrol();
-                if (seesPlayer && stateTimer > 1f) SetState(State.Chase);
+                if (seesPlayer && stateTimer > stats.noticeDelay) SetState(State.Chase);
                 break;
 
             case State.Chase:
@@ -37,13 +44,13 @@ public class FoxPatrol : EnemyBase
                 if (seesPlayer && moving) lostTimer = 0f;
                 else lostTimer += Time.deltaTime;
 
-                if (DistanceToPlayer() < attackRange && IsOnScreen()) SetState(State.WindUp);
-                else if (lostTimer > loseTime) SetState(State.Patrol);
+                if (DistanceToPlayer() < stats.attackRange && IsOnScreen()) SetState(State.WindUp);
+                else if (lostTimer > stats.loseTime) SetState(State.Patrol);
                 break;
 
             case State.WindUp:
                 MoveX(0f);
-                if (stateTimer >= windUp)
+                if (stateTimer >= stats.windUp)
                 {
                     Bite();
                     SetState(State.Recover);
@@ -52,7 +59,7 @@ public class FoxPatrol : EnemyBase
 
             case State.Recover:
                 MoveX(0f);
-                if (stateTimer >= recoverTime) SetState(State.Chase);
+                if (stateTimer >= stats.cooldown) SetState(State.Chase);
                 break;
         }
     }
@@ -67,16 +74,16 @@ public class FoxPatrol : EnemyBase
 
     void Patrol()
     {
-        float dx = points[pointIndex].position.x - transform.position.x;
+        float dx = patrolX[pointIndex] - transform.position.x;
 
         if (Mathf.Abs(dx) < 0.1f)
         {
-            pointIndex = (pointIndex + 1) % points.Length;
+            pointIndex = (pointIndex + 1) % patrolX.Length;
             return;
         }
 
         Face(dx);
-        MoveX(facing * patrolSpeed);
+        MoveX(facing * stats.patrolSpeed);
     }
 
     bool Chase()
@@ -85,16 +92,16 @@ public class FoxPatrol : EnemyBase
 
         if (CanWalk(facing))
         {
-            MoveX(facing * chaseSpeed);
+            MoveX(facing * stats.chaseSpeed);
             return true;
         }
 
         MoveX(0f);
-        return DistanceToPlayer() < attackRange;
+        return DistanceToPlayer() < stats.attackRange;
     }
 
     void Bite()
     {
-        if (DistanceToPlayer() <= attackRange) playerHealth.TakeDamage(damage);
+        if (DistanceToPlayer() <= stats.attackRange) playerHealth.TakeDamage(stats.damage);
     }
 }

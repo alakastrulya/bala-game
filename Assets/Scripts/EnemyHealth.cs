@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] int maxHp = 2;
     [SerializeField] AudioClip hitClip;
     [SerializeField] AudioClip deathClip;
     [SerializeField] float deathJump = 5f;
@@ -15,12 +14,14 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] Color barColor = new Color(0.3f, 0.85f, 0.3f);
 
     int hp;
+    int maxHp;
     SpriteRenderer sr;
     Transform barFill;
     bool dead;
 
     void Awake()
     {
+        maxHp = GetComponent<EnemyBase>().Stats.maxHp;
         hp = maxHp;
         sr = GetComponent<SpriteRenderer>();
         CreateBar();

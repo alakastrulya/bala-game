@@ -4,13 +4,10 @@ using TMPro;
 public abstract class EnemyBase : MonoBehaviour
 {
     [SerializeField] protected Transform player;
-    [SerializeField] protected float viewRange = 6f;
-    [SerializeField] protected float fov = 120f;
     [SerializeField] protected LayerMask obstacleMask;
     [SerializeField] protected bool spriteFacesRight = true;
     [SerializeField] protected Color warnColor = Color.red;
     [SerializeField] protected TMP_Text stateLabel;
-    [SerializeField] protected float alertTime = 3f;
 
     protected Rigidbody2D rb;
     protected SpriteRenderer sr;
@@ -47,11 +44,13 @@ public abstract class EnemyBase : MonoBehaviour
         Think();
     }
 
+    public abstract EnemyStats Stats { get; }
+
     protected abstract void Think();
 
     public void Alert()
     {
-        alertTimer = alertTime;
+        alertTimer = Stats.alertTime;
         Face(PlayerDX());
     }
 
@@ -60,8 +59,8 @@ public abstract class EnemyBase : MonoBehaviour
         Vector2 toPlayer = player.position - transform.position;
         float dist = toPlayer.magnitude;
 
-        if (dist > viewRange) return false;
-        if (Vector2.Angle(new Vector2(facing, 0f), toPlayer) > fov / 2f) return false;
+        if (dist > Stats.viewRange) return false;
+        if (Vector2.Angle(new Vector2(facing, 0f), toPlayer) > Stats.fov / 2f) return false;
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, toPlayer.normalized, dist, obstacleMask);
         return hit.collider == null;

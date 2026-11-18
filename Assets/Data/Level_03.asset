@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fc8895ac5994b96aa4125bc8055642, type: 3}
+  m_Name: Level_03
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  levelName: Level 3
+  goal: 2
+  timeLimit: 150
+  playerStart: {x: 0, y: 0}
+  enemies:
+  - prefab: {fileID: 5533720446550551443, guid: 3ddabbb64a578433e9ee9e31e0e44ad4, type: 3}
+    position: {x: -5.55, y: 6.05}
+    patrolDistance: 0
+  - prefab: {fileID: 1066314336288498587, guid: 299aba1529abf4e7a92d76ffdbdaf2a6, type: 3}
+    position: {x: 5.87, y: -1.99}
+    patrolDistance: 0
+  - prefab: {fileID: 2897891787065345345, guid: 2ceba053de075486cb50849f60f59fa4, type: 3}
+    position: {x: -0.05, y: 3.99}
+    patrolDistance: 0
+  - prefab: {fileID: 2897891787065345345, guid: 2ceba053de075486cb50849f60f59fa4, type: 3}
+    position: {x: -6.36, y: -1.82}
+    patrolDistance: 0
+  - prefab: {fileID: 5533720446550551443, guid: 3ddabbb64a578433e9ee9e31e0e44ad4, type: 3}
+    position: {x: 5.85, y: 5.97}
+    patrolDistance: 0
+  coinPrefab: {fileID: 0}
+  coins: []

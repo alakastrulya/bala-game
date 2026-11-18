@@ -5,8 +5,11 @@ using TMPro;
 
 public class Player2D : MonoBehaviour
 {
-    public float speed = 7f;
-    public float jumpForce = 12f;
+    [SerializeField] PlayerStats stats;
+    [SerializeField] ItemStats items;
+    public PlayerStats Stats => stats;
+    public ItemStats Items => items;
+
     public float fallThresholdY = -10f;
 
     private Animator animator;
@@ -39,6 +42,7 @@ public class Player2D : MonoBehaviour
 
     void Start()
     {
+        if (winMenu == null) winMenu = FindAnyObjectByType<WinMenu>();
         coinsTotal = GameObject.FindGameObjectsWithTag("Coin").Length;
         Debug.Log("Coins in this level: " + coinsTotal);
         UpdateCoinUI();
@@ -54,7 +58,7 @@ public class Player2D : MonoBehaviour
     {
         if (!onGround) return;
 
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, stats.jumpForce);
         onGround = false;
         if (animator != null) animator.SetBool("isJumping", true);
     }
@@ -81,7 +85,7 @@ public class Player2D : MonoBehaviour
     void FixedUpdate()
     {
         float x = move.x;
-        rb.linearVelocity = new Vector2(x * speed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(x * stats.speed, rb.linearVelocity.y);
 
         bool isMoving = Mathf.Abs(x) > 0.01f;
         if (animator != null)
@@ -124,11 +128,21 @@ public class Player2D : MonoBehaviour
         {
             if (levelFinished) return;
 
+            if (LevelLoader.Instance != null)
+            {
+                if (LevelLoader.Instance.GoalDone(coins, coinsTotal))
+                {
+                    levelFinished = true;
+                    LevelLoader.Instance.Complete(coins);
+                }
+                else Debug.Log("Goal not done yet: " + LevelLoader.Instance.Data.goal);
+                return;
+            }
+
             if (coins >= coinsTotal)
             {
                 levelFinished = true;
-                if (winMenu != null) winMenu.ShowWin();
-                else CompleteLevelAndLoadNext();
+                CompleteLevelAndLoadNext();
             }
             else
             {
@@ -147,7 +161,7 @@ public class Player2D : MonoBehaviour
 
         if (other.gameObject.CompareTag("Enemy"))
         {
-            if (health != null) health.TakeDamage(1);
+            if (health != null) health.TakeDamage(items.hazardDamage);
         }
     }
 
@@ -159,6 +173,14 @@ public class Player2D : MonoBehaviour
 
     void CompleteLevelAndLoadNext()
     {
+        int score = LevelCatalog.ScoreForCurrent(coins);
+        if (winMenu != null)
+        {
+            winMenu.FinishWithScore(score);
+            return;
+        }
+
+        LevelCatalog.CompleteCurrent(score);
         int next = SceneManager.GetActiveScene().buildIndex + 1;
         if (next < SceneManager.sceneCountInBuildSettings) SceneManager.LoadScene(next);
         else SceneManager.LoadScene(0);

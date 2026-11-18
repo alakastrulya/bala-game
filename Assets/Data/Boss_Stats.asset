@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a2b0ca1c01a430898a7fe10e9ae4e9, type: 3}
+  m_Name: Boss_Stats
+  m_EditorClassIdentifier: Assembly-CSharp::BossStats
+  maxHp: 6
+  startDelay: 2
+  warnTime: 0.8
+  pause: 2.5
+  pausePhase2: 1.5
+  countPhase1: 3
+  countPhase2: 5
+  anglePhase1: 20
+  anglePhase2: 25
+  syringeSpeed: 8
+  spawnStartDelay: 1
+  spawnWarnTime: 1
+  spawnInterval: 2.5
+  spawnIntervalPhase2: 1.5

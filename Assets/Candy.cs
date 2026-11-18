@@ -4,6 +4,6 @@ public class Candy : Hazard
 {
     protected override void OnHitPlayer(Health player)
     {
-        player.Heal(1);
+        player.Heal(player.GetComponent<Player2D>().Items.candyHeal);
     }
 }
