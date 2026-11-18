@@ -8,3 +8,11 @@ The agent created a "doctor-shooter" character; I replaced it with a field mouse
 2026-11-12  Playtest on mobile: Konstantin took 1 attempt, Rashidin took 2–3 attempts. The joystick was too small, and both the goose and the mouse were too light—they could dodge with ease.
 2026-11-12  Increased joystick size from 0.8 to 1.7 (doubled in scale) because it was difficult to hit with a finger on an Android phone.
 2026-11-12  Adjusted the goose’s "wind-up" time from 0.7 to 0.5 and the mouse’s "aim" time from 0.6 to 0.4 to make the enemies more dangerous.
+
+# Week 11 - Data and Saves
+
+2026-11-17 I asked for an explanation on how to move all numerical balance parameters into ScriptableObjects. Originally, there was one large class for all stats; I broke it down into an abstract `EnemyStats` class with specific implementations for the fox, mouse, and goose. I also added separate classes for the player, items, and bosses, so that each asset now contains only the fields relevant to it.
+
+2026-11-18 The game would always launch on Level 3; the issue was that the `GameSession.LevelIndex` variable was static. I couldn't figure out what was wrong even after debugging, so I asked for help in the chat.
+
+2026-11-18 A `NullReference` error occurred when selecting a level: the `LevelCatalog` object was located in a folder named "Resources 1," which caused the `Resources.Load` method to return `null`. I moved it into the "Resources" folder.
