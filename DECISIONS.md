@@ -16,3 +16,11 @@ The agent created a "doctor-shooter" character; I replaced it with a field mouse
 2026-11-18 The game would always launch on Level 3; the issue was that the `GameSession.LevelIndex` variable was static. I couldn't figure out what was wrong even after debugging, so I asked for help in the chat.
 
 2026-11-18 A `NullReference` error occurred when selecting a level: the `LevelCatalog` object was located in a folder named "Resources 1," which caused the `Resources.Load` method to return `null`. I moved it into the "Resources" folder.
+
+# Week 12 - Sound
+
+2026-11-23 I checked where my old sounds came from. The music (Adai) and the win fanfare were taken from YouTube with no license, so I could not list them in the README. I replaced all music and sound effects others, synthesized online: dombra and sybyzgy-style music.
+
+2026-11-24 The enemies' wind-up clips (fox growl, goose hiss, mouse aim) were never assigned in the prefabs, so the attacks were silent. Now each enemy and the boss has its own wind-up sound that starts with the wind-up state, before the attack lands.
+
+2026-11-25 I accidentally deleted the Data folder in the Project window, and Cmd+Z did not bring it back. I restored it from the Trash, together with the .meta files, so all references in the scenes stayed.
