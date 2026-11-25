@@ -128,8 +128,8 @@ public abstract class EnemyBase : MonoBehaviour
         return sr.isVisible;
     }
 
-    protected void PlaySound(AudioClip clip)
+    protected void PlaySound(Sfx id)
     {
-        if (clip != null) AudioSource.PlayClipAtPoint(clip, transform.position);
+        AudioManager.Play(id);
     }
 }

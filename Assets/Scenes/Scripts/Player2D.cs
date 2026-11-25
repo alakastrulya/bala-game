@@ -22,8 +22,6 @@ public class Player2D : MonoBehaviour
     private int coins;
     private int coinsTotal;
 
-    public AudioClip coinClip;
-    private AudioSource audioSource;
     private Health health;
     public TMP_Text coinText;
     public bool finishOnAllCoins = false;
@@ -35,7 +33,6 @@ public class Player2D : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
         shooter = GetComponent<Shooter>();
         health = GetComponent<Health>();
     }
@@ -61,6 +58,7 @@ public class Player2D : MonoBehaviour
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, stats.jumpForce);
         onGround = false;
         if (animator != null) animator.SetBool("isJumping", true);
+        AudioManager.Play(Sfx.Jump);
     }
 
     public void OnFire()
@@ -107,11 +105,7 @@ public class Player2D : MonoBehaviour
     {
         if (other.CompareTag("Coin"))
         {
-            if (audioSource != null && coinClip != null)
-            {
-                audioSource.PlayOneShot(coinClip);
-            }
-
+            AudioManager.Play(Sfx.Coin);
             Destroy(other.gameObject);
             coins++;
             Debug.Log("Coins: " + coins + " / " + coinsTotal);
@@ -168,6 +162,7 @@ public class Player2D : MonoBehaviour
     void RestartLevel()
     {
         Debug.Log("Game Over / Restart");
+        AudioManager.Play(Sfx.Lose);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

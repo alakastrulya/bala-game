@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Pumpers : Hazard
 {
-    public AudioClip boomClip;
-
     protected override void OnLanded()
     {
         Invoke(nameof(Detonate), FindFirstObjectByType<Player2D>().Items.bombFuse);
@@ -11,7 +9,7 @@ public class Pumpers : Hazard
 
     void Detonate()
     {
-        if (boomClip != null) AudioSource.PlayClipAtPoint(boomClip, transform.position);
+        AudioManager.Play(Sfx.Explosion);
         Explode();
     }
 

@@ -10,9 +10,6 @@ public class Health : MonoBehaviour
     private bool invincible = false;
     private SpriteRenderer sr;
 
-    public AudioClip hurtClip;
-    public AudioClip healClip;
-    private AudioSource audioSource;
     public Image[] hearts;
 
     void Awake()
@@ -24,7 +21,6 @@ public class Health : MonoBehaviour
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-        audioSource = GetComponent<AudioSource>();
         UpdateHeartsUI();
     }
 
@@ -37,17 +33,14 @@ public class Health : MonoBehaviour
 
         UpdateHeartsUI();
 
-        if (audioSource != null && hurtClip != null)
-        {
-            audioSource.PlayOneShot(hurtClip);
-        }
-
         if (hp <= 0)
         {
+            AudioManager.Play(Sfx.Lose);
             RestartLevel();
         }
         else
         {
+            AudioManager.Play(Sfx.PlayerHurt);
             StartCoroutine(InvincibilityRoutine());
         }
     }
@@ -59,11 +52,7 @@ public class Health : MonoBehaviour
         Debug.Log("Healed! HP: " + hp);
 
         UpdateHeartsUI();
-        
-        if (audioSource != null && healClip != null)
-        {
-            audioSource.PlayOneShot(healClip);
-        }
+        AudioManager.Play(Sfx.Heal);
     }
 
     IEnumerator InvincibilityRoutine()

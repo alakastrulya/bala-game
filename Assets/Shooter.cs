@@ -8,9 +8,6 @@ public class Shooter : MonoBehaviour
     float cooldown;
     float nextShot = 0f;
 
-    public AudioClip shootClip;
-    private AudioSource audioSource;
-
     public Slider cooldownSlider;
 
     void Awake()
@@ -21,8 +18,6 @@ public class Shooter : MonoBehaviour
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-
         if (cooldownSlider != null)
         {
             cooldownSlider.maxValue = cooldown;
@@ -49,10 +44,7 @@ public class Shooter : MonoBehaviour
             cooldownSlider.value = 0f;
         }
 
-        if (audioSource != null && shootClip != null)
-        {
-            audioSource.PlayOneShot(shootClip);
-        }
+        AudioManager.Play(Sfx.Shoot);
 
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 

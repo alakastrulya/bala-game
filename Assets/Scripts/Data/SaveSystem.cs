@@ -35,7 +35,8 @@ public static class SaveSystem
         {
             if (!File.Exists(FilePath)) return new SaveData();
 
-            SaveData loaded = JsonUtility.FromJson<SaveData>(File.ReadAllText(FilePath));
+            string json = File.ReadAllText(FilePath);
+            SaveData loaded = JsonUtility.FromJson<SaveData>(json);
             if (loaded == null || loaded.version != CurrentVersion)
             {
                 LoadFailed = true;
@@ -43,7 +44,9 @@ public static class SaveSystem
             }
 
             loaded.unlockedLevels = Mathf.Max(1, loaded.unlockedLevels);
+            if (!json.Contains("\"sfxVolume\"")) loaded.sfxVolume = 1f;   // save from week 11
             loaded.musicVolume = Mathf.Clamp01(loaded.musicVolume);
+            loaded.sfxVolume = Mathf.Clamp01(loaded.sfxVolume);
             if (loaded.bestScores == null) loaded.bestScores = new System.Collections.Generic.List<int>();
             return loaded;
         }
@@ -95,6 +98,11 @@ public static class SaveSystem
         Data.musicVolume = Mathf.Clamp01(volume);
     }
 
+    public static void SetSfxVolume(float volume)
+    {
+        Data.sfxVolume = Mathf.Clamp01(volume);
+    }
+
     public static void AcknowledgeLoadFailed()
     {
         LoadFailed = false;
@@ -102,9 +110,11 @@ public static class SaveSystem
 
     public static void ResetProgress()
     {
-        float volume = Data.musicVolume;
+        float music = Data.musicVolume;
+        float sfx = Data.sfxVolume;
         data = new SaveData();
-        data.musicVolume = volume;
+        data.musicVolume = music;
+        data.sfxVolume = sfx;
         Save();
     }
 }

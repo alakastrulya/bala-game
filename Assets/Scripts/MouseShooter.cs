@@ -10,7 +10,6 @@ public class MouseShooter : EnemyBase
     [SerializeField] MouseStats stats;
     [SerializeField] Seed seedPrefab;
     [SerializeField] LineRenderer aimLine;
-    [SerializeField] AudioClip aimClip;
 
     State state;
     Vector2 aimDir;
@@ -72,7 +71,7 @@ public class MouseShooter : EnemyBase
         state = next;
         EnterState(next.ToString(), (int)next, next == State.Aim);
         if (aimLine != null) aimLine.enabled = next == State.Aim;
-        if (next == State.Aim) PlaySound(aimClip);
+        if (next == State.Aim) PlaySound(Sfx.MouseWindUp);
     }
 
     void KeepDistance()

@@ -26,12 +26,6 @@ public class MenuButtons : MonoBehaviour
     public void BackToMenu()
     {
         Time.timeScale = 1f;
-
-        if (BackgroundMusic.instance != null)
-        {
-            BackgroundMusic.instance.PlayDefaultMusic();
-        }
-
         SceneManager.LoadScene(menuSceneName);
     }
 
@@ -68,11 +62,7 @@ public class MenuButtons : MonoBehaviour
         if (pauseButton != null) pauseButton.SetActive(false);
 
         Time.timeScale = 0f;
-
-        if (BackgroundMusic.instance != null)
-        {
-            BackgroundMusic.instance.GetComponent<AudioSource>()?.Pause();
-        }
+        AudioManager.SetPaused(true);
     }
 
     public void Resume()
@@ -82,21 +72,13 @@ public class MenuButtons : MonoBehaviour
         if (pauseButton != null) pauseButton.SetActive(true);
 
         Time.timeScale = 1f;
-
-        if (BackgroundMusic.instance != null)
-        {
-            BackgroundMusic.instance.GetComponent<AudioSource>()?.UnPause();
-        }
+        AudioManager.SetPaused(false);
     }
 
     public void RestartLevel()
     {
         Debug.Log("Game Over / Restart");
-        
-        if (BackgroundMusic.instance != null)
-        {
-            BackgroundMusic.instance.PlayDefaultMusic();
-        }
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

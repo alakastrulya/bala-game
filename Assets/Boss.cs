@@ -9,8 +9,6 @@ public class Boss : MonoBehaviour
     public BossStats Stats => stats;
     public Slider hpBar;
     public WinMenu winMenu;
-    public AudioClip hitClip;
-    public AudioClip winClip;
 
     int hp;
     int maxHp;
@@ -39,7 +37,7 @@ public class Boss : MonoBehaviour
 
         hp -= dmg;
         if (hpBar != null) hpBar.value = hp;
-        if (hitClip != null) AudioSource.PlayClipAtPoint(hitClip, transform.position);
+        AudioManager.Play(Sfx.BossHit);
 
         if (hp <= 0) Die();
         else StartCoroutine(Flash());
@@ -56,7 +54,7 @@ public class Boss : MonoBehaviour
     {
         dead = true;
         GetComponent<Collider2D>().enabled = false;
-        if (winClip != null) AudioSource.PlayClipAtPoint(winClip, transform.position);
+        AudioManager.Play(Sfx.EnemyDeath);
         Invoke(nameof(ShowWin), 1.5f);
     }
 

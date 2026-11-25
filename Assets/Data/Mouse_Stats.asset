@@ -24,4 +24,4 @@ MonoBehaviour:
   preferredDistance: 5
   lookTime: 2
   giveUpTime: 3
-  shotSpeed: 6
+  shotSpeed: 3

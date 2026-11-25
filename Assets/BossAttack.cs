@@ -8,7 +8,6 @@ public class BossAttack : MonoBehaviour
     public Transform firePoint;
     public Syringe syringePrefab;
     public Animator animator;
-    public AudioClip shootClip;
 
     BossStats stats;
 
@@ -26,6 +25,7 @@ public class BossAttack : MonoBehaviour
         while (!boss.IsDead)
         {
             if (animator != null) animator.SetTrigger("Attack");
+            AudioManager.Play(Sfx.BossWindUp);   // warning before the syringes fly
             yield return new WaitForSeconds(stats.warnTime);
 
             if (boss.IsDead) yield break;
@@ -51,6 +51,6 @@ public class BossAttack : MonoBehaviour
             s.speed = stats.syringeSpeed;
         }
 
-        if (shootClip != null) AudioSource.PlayClipAtPoint(shootClip, firePoint.position);
+        AudioManager.Play(Sfx.BossShoot);
     }
 }

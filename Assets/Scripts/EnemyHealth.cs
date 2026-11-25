@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] AudioClip hitClip;
-    [SerializeField] AudioClip deathClip;
     [SerializeField] float deathJump = 5f;
     [SerializeField] float deathTime = 1f;
     [SerializeField] float blinkTime = 0.3f;
@@ -38,7 +36,7 @@ public class EnemyHealth : MonoBehaviour
             return;
         }
 
-        if (hitClip != null) AudioSource.PlayClipAtPoint(hitClip, transform.position);
+        AudioManager.Play(Sfx.EnemyHit);
         UpdateBar();
         StopAllCoroutines();
         StartCoroutine(Blink());
@@ -51,7 +49,7 @@ public class EnemyHealth : MonoBehaviour
     {
         dead = true;
         StopAllCoroutines();
-        if (deathClip != null) AudioSource.PlayClipAtPoint(deathClip, transform.position);
+        AudioManager.Play(Sfx.EnemyDeath);
 
         EnemyBase ai = GetComponent<EnemyBase>();
         if (ai != null) ai.enabled = false;
