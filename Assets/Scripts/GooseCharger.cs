@@ -5,7 +5,6 @@ public class GooseCharger : EnemyBase
     enum State { Idle, WindUp, Dash, Stunned }
 
     [SerializeField] GooseStats stats;
-    [SerializeField] AudioClip hissClip;
 
     State state;
     int dashDir;
@@ -52,7 +51,7 @@ public class GooseCharger : EnemyBase
         if (next == State.WindUp)
         {
             dashDir = facing;
-            PlaySound(hissClip);
+            PlaySound(Sfx.GooseWindUp);
         }
     }
 

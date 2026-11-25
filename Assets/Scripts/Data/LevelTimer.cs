@@ -46,6 +46,7 @@ public class LevelTimer : MonoBehaviour
         if (timeLeft <= 0f)
         {
             running = false;
+            AudioManager.Play(Sfx.Lose);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }

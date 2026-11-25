@@ -42,8 +42,16 @@ public class WinMenu : MonoBehaviour
         if (levelCompleteResult != null) levelCompleteResult.text = result;
         if (winResult != null) winResult.text = result;
 
-        if (HasNextDataLevel || HasNextScene) ShowLevelComplete();
-        else ShowWin();
+        if (HasNextDataLevel || HasNextScene)
+        {
+            AudioManager.Play(Sfx.LevelComplete);
+            ShowLevelComplete();
+        }
+        else
+        {
+            AudioManager.Play(Sfx.Win);
+            ShowWin();
+        }
     }
 
     public void ShowLevelComplete()
@@ -65,11 +73,6 @@ public class WinMenu : MonoBehaviour
 
         winPanel.SetActive(true);
         Time.timeScale = 0f;
-
-        if (BackgroundMusic.instance != null)
-        {
-            BackgroundMusic.instance.PlayWinMusic();
-        }
     }
 
     public void NextLevel()
@@ -96,24 +99,12 @@ public class WinMenu : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1f;
-
-        if (BackgroundMusic.instance != null)
-        {
-            BackgroundMusic.instance.PlayDefaultMusic();
-        }
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void BackToMenu()
     {
         Time.timeScale = 1f;
-
-        if (BackgroundMusic.instance != null)
-        {
-            BackgroundMusic.instance.PlayDefaultMusic();
-        }
-
         SceneManager.LoadScene(menuSceneName);
     }
 }

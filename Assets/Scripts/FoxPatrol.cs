@@ -6,7 +6,6 @@ public class FoxPatrol : EnemyBase
 
     [SerializeField] FoxStats stats;
     [SerializeField] Transform[] points;
-    [SerializeField] AudioClip growlClip;
 
     State state;
     int pointIndex;
@@ -69,7 +68,7 @@ public class FoxPatrol : EnemyBase
         state = next;
         EnterState(next.ToString(), (int)next, next == State.WindUp);
         lostTimer = 0f;
-        if (next == State.WindUp) PlaySound(growlClip);
+        if (next == State.WindUp) PlaySound(Sfx.FoxWindUp);
     }
 
     void Patrol()

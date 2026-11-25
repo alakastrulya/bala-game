@@ -76,6 +76,7 @@ public class LevelLoader : MonoBehaviour
         if (timeLeft <= 0f)
         {
             finished = true;
+            AudioManager.Play(Sfx.Lose);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
