@@ -1,0 +1,122 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a24d800a74a6444b484c866c0d9a9744, type: 3}
+  m_Name: SoundLibrary
+  m_EditorClassIdentifier: Assembly-CSharp::SoundLibrary
+  mixer: {fileID: 24100000, guid: adab6de21752d482193ca73d921acbac, type: 2}
+  tracksGroup: {fileID: 4319055400300867397, guid: adab6de21752d482193ca73d921acbac, type: 2}
+  sfxGroup: {fileID: -7840844863004016663, guid: adab6de21752d482193ca73d921acbac, type: 2}
+  uiGroup: {fileID: -7243459478283965607, guid: adab6de21752d482193ca73d921acbac, type: 2}
+  normalSnapshot: {fileID: 24500006, guid: adab6de21752d482193ca73d921acbac, type: 2}
+  pausedSnapshot: {fileID: -2347543921032079023, guid: adab6de21752d482193ca73d921acbac, type: 2}
+  pauseFadeTime: 0.3
+  menuMusic: {fileID: 8300000, guid: 5cd2f26e556334f32a67495a184e4f74, type: 3}
+  levelMusic: {fileID: 8300000, guid: 749299ccab5cf470e91e82ea4a45deda, type: 3}
+  crossfadeTime: 1
+  minPitch: 0.92
+  maxPitch: 1.08
+  jump:
+    clips:
+    - {fileID: 8300000, guid: 250b897c3667c4f7899fc3b05ea59269, type: 3}
+    - {fileID: 8300000, guid: d86dc0b11f8fd4c469d56d83bbd24a46, type: 3}
+    volume: 0.5
+    randomPitch: 1
+  shoot:
+    clips:
+    - {fileID: 8300000, guid: d98d2b47ec47646729b5bc92a3bf409a, type: 3}
+    - {fileID: 8300000, guid: 2de75415952ab4dc9be0be6bc41a90c5, type: 3}
+    volume: 0.6
+    randomPitch: 1
+  coin:
+    clips:
+    - {fileID: 8300000, guid: 0b3a7685905d54a50a106a00d5fa232e, type: 3}
+    - {fileID: 8300000, guid: 3f28b451258d441339c162cf6f5fe1dd, type: 3}
+    volume: 0.7
+    randomPitch: 1
+  heal:
+    clips:
+    - {fileID: 8300000, guid: 48b90569ab19e4fa6851660de0f30c70, type: 3}
+    volume: 0.8
+    randomPitch: 1
+  playerHurt:
+    clips:
+    - {fileID: 8300000, guid: a77f16956b2df487a84f6af27af26003, type: 3}
+    - {fileID: 8300000, guid: e93837e6eaedf4982b62565ce2663c9c, type: 3}
+    volume: 1
+    randomPitch: 1
+  lose:
+    clips:
+    - {fileID: 8300000, guid: b5453b3c5c2624d07ae47e377e6d1da1, type: 3}
+    volume: 0.9
+    randomPitch: 0
+  foxWindUp:
+    clips:
+    - {fileID: 8300000, guid: 3ccee6733b2b8408c840b4632c2c57e5, type: 3}
+    volume: 1
+    randomPitch: 1
+  gooseWindUp:
+    clips:
+    - {fileID: 8300000, guid: ab0095d9598444cc79c5a70f0edd333c, type: 3}
+    volume: 0.9
+    randomPitch: 1
+  mouseWindUp:
+    clips:
+    - {fileID: 8300000, guid: ff00afccda18b4ed5a8d3e73f4b9bb93, type: 3}
+    volume: 0.8
+    randomPitch: 1
+  bossWindUp:
+    clips:
+    - {fileID: 8300000, guid: 37989dbc7335843f6bfaa27e9f5ebe24, type: 3}
+    volume: 0.9
+    randomPitch: 1
+  enemyHit:
+    clips:
+    - {fileID: 8300000, guid: c7fa283d0c82a4b80825679a7b74418a, type: 3}
+    - {fileID: 8300000, guid: 9a50524b12ea04a7192c50aea23278a3, type: 3}
+    - {fileID: 8300000, guid: 885b24a27cfa149ad849c8e3be3e89b3, type: 3}
+    volume: 0.9
+    randomPitch: 1
+  enemyDeath:
+    clips:
+    - {fileID: 8300000, guid: 87da140396f504054b28af73de81c751, type: 3}
+    volume: 0.8
+    randomPitch: 1
+  bossHit:
+    clips:
+    - {fileID: 8300000, guid: 3c62e9e2bb7534bbd96a130f57325ae1, type: 3}
+    volume: 0.9
+    randomPitch: 1
+  bossShoot:
+    clips:
+    - {fileID: 8300000, guid: bf398bcfcdd724b61a5fb90e2a447830, type: 3}
+    volume: 0.7
+    randomPitch: 1
+  explosion:
+    clips:
+    - {fileID: 8300000, guid: 0ed48fbd5ef5a466c98a00388fd0554d, type: 3}
+    volume: 1
+    randomPitch: 1
+  uiClick:
+    clips:
+    - {fileID: 8300000, guid: 17b1e499a630d40558b831ff45e0b1c2, type: 3}
+    volume: 0.6
+    randomPitch: 0
+  levelComplete:
+    clips:
+    - {fileID: 8300000, guid: b19fcf12f8d61450483ba76f5545c528, type: 3}
+    volume: 0.9
+    randomPitch: 0
+  win:
+    clips:
+    - {fileID: 8300000, guid: 8a3990ee3c1a94aab84e29622fd0260a, type: 3}
+    volume: 1
+    randomPitch: 0
